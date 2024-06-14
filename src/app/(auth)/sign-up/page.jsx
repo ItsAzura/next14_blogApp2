@@ -29,6 +29,8 @@ const SignUpPage = () => {
       alert(res.error);
     }
   };
+
+  const isFormValid = formData.username && formData.email && formData.password;
   console.log(formData);
   return (
     <div className={styles.Container}>
@@ -53,7 +55,7 @@ const SignUpPage = () => {
             <input
               type="email"
               name="email"
-              id="username"
+              id="email"
               value={formData.email}
               onChange={handleChange}
             />
@@ -69,7 +71,9 @@ const SignUpPage = () => {
             />
           </div>
           <div className={styles.btn}>
-            <button type="submit">Sign Up</button>
+            <button type="submit" disabled={!isFormValid}>
+              Sign Up
+            </button>
           </div>
         </form>
         <Link href="/sign-in">Already have an account?</Link>
