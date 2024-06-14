@@ -18,9 +18,42 @@
 .navbarItems {
   display: flex;
   gap: 2rem;
+  align-items: center;
 }
 
 .navbarItems a {
+  padding: 0.5rem 0.75rem;
   font-size: 1.2rem;
   font-weight: 500;
+  border-radius: 5px;
+  background-color: #1f6feb;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.navbarItems a:hover {
+  transform: scale(1.1);
+  -webkit-box-shadow: 0 0 8px 1px #ffffff;
+  -moz-box-shadow: 0 0 8px 1px #ffffff;
+  box-shadow: 0 0 8px 1px #ffffff;
+}
+
+.navbarItems button {
+  padding: 0.5rem 0.75rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 5px;
+  background-color: #f1356d;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.navbarItems button:hover {
+  transform: scale(1.1);
+  -webkit-box-shadow: 0 0 8px 1px #ffffff;
+  -moz-box-shadow: 0 0 8px 1px #ffffff;
+  box-shadow: 0 0 8px 1px #ffffff;
 }

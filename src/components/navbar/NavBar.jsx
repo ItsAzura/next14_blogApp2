@@ -3,7 +3,7 @@ import styles from './NavBar.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const NavBar = ({ user }) => {
+const NavBar = ({ user, logout }) => {
   return (
     <div className={styles.navbar}>
       <Link href="/" className={styles.logo}>
@@ -15,6 +15,7 @@ const NavBar = ({ user }) => {
         <Link href="/blogs/AddBlog">Create</Link>
         <Link href="/blogs/MyBlogs">My Blogs</Link>
         <Link href="/profile">{user?.data?.username}</Link>
+        <button onClick={logout}>Logout</button>
       </div>
     </div>
   );
