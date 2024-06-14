@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Navbar from '@/components/navbar/NavBar';
 import Link from 'next/link';
+import Footer from '@/components/footer/Footer';
 
 export default function Home() {
   const router = useRouter();
@@ -32,7 +33,7 @@ export default function Home() {
   }, []);
 
   const handleSignOut = async () => {
-    const result = await signOutUser();
+    await signOutUser();
     router.replace('/sign-in');
   };
 
@@ -56,6 +57,7 @@ export default function Home() {
           <Image src="/home.png" alt="logo" width={500} height={500} />
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
