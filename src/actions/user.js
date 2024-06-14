@@ -147,3 +147,8 @@ export const AuthUser = async () => {
     };
   }
 };
+
+export const signOutUser = async () => {
+  const getCookies = cookies();
+  getCookies.set('next14_token', '');
+};
