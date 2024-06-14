@@ -7,6 +7,7 @@ import { signOutUser } from '@/actions/user';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Navbar from '@/components/navbar/NavBar';
+import Link from 'next/link';
 
 export default function Home() {
   const router = useRouter();
@@ -37,7 +38,24 @@ export default function Home() {
 
   return (
     <div>
-      <Navbar user={user} />
+      <Navbar user={user} logout={handleSignOut} />
+      <div className={styles.container}>
+        <div className={styles.content}>
+          <p>Hi, {user?.data?.username}!!!</p>
+          <h1>Welcome to Azura's Blog</h1>
+          <p>
+            This is a simple blog application where you can create, read,
+            update, and delete blogs.
+          </p>
+          <p>You can also view your own blogs and edit them.</p>
+          <Link className={styles.btn} href="/blogs">
+            Enjoy your stay!
+          </Link>
+        </div>
+        <div className={styles.image}>
+          <Image src="/home.png" alt="logo" width={500} height={500} />
+        </div>
+      </div>
     </div>
   );
 }
