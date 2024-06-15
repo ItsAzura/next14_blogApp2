@@ -1,0 +1,31 @@
+.Card {
+  width: 240px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  margin: 1rem;
+  background-color: #111019;
+  border-radius: 6px;
+  gap: 6px;
+  transition: all 0.3s ease-in-out;
+}
+
+.Card:hover {
+  box-shadow: 0 0 10px #fff;
+}
+
+.Card img {
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.Card h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.Card p {
+  font-size: 1rem;
+  font-weight: 500;
+}
