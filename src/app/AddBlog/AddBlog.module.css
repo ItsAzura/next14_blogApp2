@@ -1,0 +1,107 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.container h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  text-shadow: 0 0 4px #fff;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 72%;
+  margin-left: 16%;
+}
+
+.form label {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.form input {
+  width: 80%;
+  height: 40px;
+  margin-bottom: 20px;
+  padding: 6px;
+  font-size: 1.2rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  transition: all 0.3s ease-in-out;
+}
+
+.form input:hover {
+  transform: scale(1.01);
+  box-shadow: 0 0 6px #fff;
+}
+
+.form input:focus {
+  transform: scale(1.01);
+  box-shadow: 0 0 6px #fff;
+}
+
+.form textarea {
+  width: 80%;
+  height: 200px;
+  margin-bottom: 20px;
+  padding: 6px;
+  font-size: 1.2rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  transition: all 0.3s ease-in-out;
+}
+
+.form textarea:hover {
+  transform: scale(1.01);
+  box-shadow: 0 0 6px #fff;
+}
+
+.form textarea:focus {
+  transform: scale(1.01);
+  box-shadow: 0 0 6px #fff;
+}
+
+.form input[type='file'] {
+  width: 100%;
+  height: 40px;
+  margin-bottom: 20px;
+  padding: 6px;
+  font-size: 1.2rem;
+  border-radius: 6px;
+  border: none;
+}
+
+.form input[type='file']:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.form input[type='file']:focus {
+  transform: none;
+  box-shadow: none;
+}
+
+.btn {
+  width: 80%;
+  margin-bottom: 20px;
+  padding: 0.75rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 8px;
+  border: none;
+  background-color: #fff;
+  color: #000;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn:hover {
+  transform: scale(1.01);
+  box-shadow: 0 0 6px #fff;
+}
