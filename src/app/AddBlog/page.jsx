@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import styles from './AddBlog.module.css';
 import { createBlog } from '@/actions/blog';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const AddBlog = () => {
   const router = useRouter();
@@ -50,6 +51,19 @@ const AddBlog = () => {
 
   return (
     <div className={styles.container}>
+      <Link href="/">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="2rem"
+          height="2rem"
+          viewBox="0 0 24 24"
+        >
+          <path
+            fill="currentColor"
+            d="M17.77 3.77L16 2L6 12l10 10l1.77-1.77L9.54 12z"
+          />
+        </svg>
+      </Link>
       <h1 className={styles.title}>Add Blog</h1>
       <form className={styles.form} onSubmit={handleSubmit}>
         <label htmlFor="title">Title</label>

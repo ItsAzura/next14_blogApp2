@@ -6,10 +6,44 @@
   margin-top: 50px;
 }
 
+.container a {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
 .container h1 {
   font-size: 3rem;
   margin-bottom: 20px;
   text-shadow: 0 0 4px #fff;
+  -webkit-animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.61, 0.355, 1)
+    both;
+  animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.61, 0.355, 1) both;
+}
+
+@-webkit-keyframes tracking-in-expand {
+  0% {
+    letter-spacing: -0.5em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes tracking-in-expand {
+  0% {
+    letter-spacing: -0.5em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .form {
@@ -23,6 +57,8 @@
 .form label {
   font-size: 1.5rem;
   margin-bottom: 10px;
+  -webkit-animation: slide-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 .form input {
@@ -34,6 +70,8 @@
   border-radius: 6px;
   border: 1px solid #ccc;
   transition: all 0.3s ease-in-out;
+  -webkit-animation: slide-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 .form input:hover {
@@ -55,6 +93,8 @@
   border-radius: 6px;
   border: 1px solid #ccc;
   transition: all 0.3s ease-in-out;
+  -webkit-animation: slide-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 .form textarea:hover {
@@ -75,6 +115,8 @@
   font-size: 1.2rem;
   border-radius: 6px;
   border: none;
+  -webkit-animation: slide-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 .form input[type='file']:hover {
@@ -99,9 +141,32 @@
   color: #000;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+  -webkit-animation: slide-right 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-right 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 .btn:hover {
   transform: scale(1.01);
   box-shadow: 0 0 6px #fff;
+}
+
+@-webkit-keyframes slide-right {
+  0% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+  100% {
+    -webkit-transform: translateX(50px);
+    transform: translateX(50px);
+  }
+}
+@keyframes slide-right {
+  0% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+  100% {
+    -webkit-transform: translateX(50px);
+    transform: translateX(50px);
+  }
 }
