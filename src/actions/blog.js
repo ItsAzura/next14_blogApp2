@@ -106,3 +106,28 @@ export const getAllBlogs = async () => {
     };
   }
 };
+
+// Hàm lấy blog theo id
+export const getBlogById = async (id) => {
+  await connectToDatabase();
+  try {
+    const blog = await Blog.findById(id);
+    if (blog) {
+      return {
+        success: true,
+        data: blog,
+      };
+    } else {
+      return {
+        success: false,
+        error: 'Blog not found',
+      };
+    }
+  } catch (error) {
+    console.log(error);
+    return {
+      success: false,
+      error: error.message,
+    };
+  }
+};

@@ -152,3 +152,27 @@ export const signOutUser = async () => {
   const getCookies = cookies();
   getCookies.set('next14_token', '');
 };
+
+export const getUserById = async (id) => {
+  await connectToDatabase();
+  try {
+    const user = await User.findById({ _id: id });
+    if (user) {
+      return {
+        success: true,
+        data: user,
+      };
+    } else {
+      return {
+        success: false,
+        error: 'User not found',
+      };
+    }
+  } catch (error) {
+    console.log(error);
+    return {
+      success: false,
+      error: error.message,
+    };
+  }
+};
