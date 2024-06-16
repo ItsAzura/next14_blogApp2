@@ -169,3 +169,61 @@ export const getBlogsByUserId = async () => {
     };
   }
 };
+
+// Hàm cập nhật blog theo id
+export const updateBlog = async (formData, id) => {
+  await connectToDatabase();
+  try {
+    const title = formData.get('title');
+    const content = formData.get('content');
+    const image = formData.get('image');
+
+    if (!title || !content) {
+      return {
+        success: false,
+        error: 'Please enter all fields',
+      };
+    }
+
+    if (!image || !(image instanceof File)) {
+      return {
+        success: false,
+        error: 'Please upload an image',
+      };
+    }
+
+    const bytes = await image.arrayBuffer();
+    const buffer = Buffer.from(bytes);
+    const profileImagePath = `D:/Nextjs/next14_blogapp/public/upload/${image.name}`;
+    await writeFile(profileImagePath, buffer);
+    console.log(`open ${profileImagePath} to see the uploaded files`);
+
+    const updateBlog = await Blog.findByIdAndUpdate(
+      id,
+      {
+        title,
+        content,
+        image: `/upload/${image.name}`,
+      },
+      { new: true }
+    );
+
+    if (updateBlog) {
+      return {
+        success: true,
+        message: 'Blog updated successfully',
+      };
+    } else {
+      return {
+        success: false,
+        error: 'Blog not updated',
+      };
+    }
+  } catch (error) {
+    console.log(error);
+    return {
+      success: false,
+      error: error.message,
+    };
+  }
+};
