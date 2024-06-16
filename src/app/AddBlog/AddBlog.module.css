@@ -57,8 +57,8 @@
 .form label {
   font-size: 1.5rem;
   margin-bottom: 10px;
-  -webkit-animation: slide-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  animation: slide-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  -webkit-animation: slide-in-left 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-in-left 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 .form input {
@@ -70,8 +70,8 @@
   border-radius: 6px;
   border: 1px solid #ccc;
   transition: all 0.3s ease-in-out;
-  -webkit-animation: slide-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  animation: slide-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  -webkit-animation: slide-in-left 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-in-left 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 .form input:hover {
@@ -93,8 +93,8 @@
   border-radius: 6px;
   border: 1px solid #ccc;
   transition: all 0.3s ease-in-out;
-  -webkit-animation: slide-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  animation: slide-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  -webkit-animation: slide-in-left 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-in-left 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 .form textarea:hover {
@@ -115,8 +115,8 @@
   font-size: 1.2rem;
   border-radius: 6px;
   border: none;
-  -webkit-animation: slide-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  animation: slide-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  -webkit-animation: slide-in-left 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-in-left 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 .form input[type='file']:hover {
@@ -141,8 +141,8 @@
   color: #000;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
-  -webkit-animation: slide-right 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  animation: slide-right 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  -webkit-animation: slide-in-left 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-in-left 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 .btn:hover {
@@ -150,23 +150,35 @@
   box-shadow: 0 0 6px #fff;
 }
 
-@-webkit-keyframes slide-right {
+@-webkit-keyframes slide-in-left {
   0% {
-    -webkit-transform: translateX(0);
-    transform: translateX(0);
+    -webkit-transform: translateX(-200px);
+    transform: translateX(-200px);
+    -webkit-filter: blur(12px);
+    filter: blur(12px);
+    opacity: 0;
   }
   100% {
-    -webkit-transform: translateX(50px);
-    transform: translateX(50px);
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    -webkit-filter: blur(0px);
+    filter: blur(0px);
+    opacity: 1;
   }
 }
-@keyframes slide-right {
+@keyframes slide-in-left {
   0% {
-    -webkit-transform: translateX(0);
-    transform: translateX(0);
+    -webkit-transform: translateX(-200px);
+    transform: translateX(-200px);
+    -webkit-filter: blur(12px);
+    filter: blur(12px);
+    opacity: 0;
   }
   100% {
-    -webkit-transform: translateX(50px);
-    transform: translateX(50px);
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    -webkit-filter: blur(0px);
+    filter: blur(0px);
+    opacity: 1;
   }
 }
