@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './AddBlog.module.css';
 import { createBlog } from '@/actions/blog';
 import { useRouter } from 'next/navigation';
@@ -46,6 +46,14 @@ const AddBlog = () => {
       alert(response.error);
     }
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem('next14_token');
+
+    if (!token) {
+      router.replace('/sign-in');
+    }
+  }, []);
 
   console.log(formData);
 

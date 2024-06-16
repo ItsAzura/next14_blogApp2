@@ -32,6 +32,11 @@ const MyBlogDetails = (props) => {
   };
 
   useEffect(() => {
+    const token = localStorage.getItem('next14_token');
+
+    if (!token) {
+      router.replace('/sign-in');
+    }
     fetchBlogDetails();
   }, []);
 
@@ -69,6 +74,40 @@ const MyBlogDetails = (props) => {
         <div className={styles.details}>
           <h1>{blog.title}</h1>
           <p>{blog.content}</p>
+        </div>
+        <div className={styles.groupBtn}>
+          <Link href={`/MyBlogs/EditBlog/${blog._id}`} className={styles.btn}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="1.5rem"
+              height="1.5rem"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2.5"
+                d="m5 16l-1 4l4-1L19.586 7.414a2 2 0 0 0 0-2.828l-.172-.172a2 2 0 0 0-2.828 0zM15 6l3 3m-5 11h8"
+              />
+            </svg>
+            Edit
+          </Link>
+          <button className={styles.btn}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="1.5rem"
+              height="1.5rem"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="currentColor"
+                d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zm2-4h2V8H9zm4 0h2V8h-2z"
+              />
+            </svg>
+            Delete
+          </button>
         </div>
       </div>
     </div>
