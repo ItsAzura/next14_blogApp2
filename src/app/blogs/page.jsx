@@ -8,6 +8,7 @@ import styles from './Blog.module.css';
 import Link from 'next/link';
 
 const Blogs = () => {
+  const [path, setPath] = useState('');
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -21,6 +22,9 @@ const Blogs = () => {
 
   useEffect(() => {
     fetchBlogList();
+    if (typeof window !== 'undefined') {
+      setPath(window.location.pathname);
+    }
   }, []);
 
   if (loading)
@@ -29,6 +33,8 @@ const Blogs = () => {
         <Loading />
       </div>
     );
+
+  console.log(path);
 
   return (
     <div className={styles.container}>
@@ -51,7 +57,7 @@ const Blogs = () => {
 
       <div className={styles.gridList}>
         {blogs.map((blog) => (
-          <BlogCard key={blog._id} blog={blog} />
+          <BlogCard key={blog._id} blog={blog} path={path} />
         ))}
       </div>
     </div>

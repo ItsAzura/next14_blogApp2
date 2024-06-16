@@ -3,10 +3,10 @@ import styles from './BlogCard.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const BlogCard = ({ blog }) => {
+const BlogCard = ({ blog, path }) => {
   return (
     <div>
-      <Link href={`/blogs/${blog._id}`} className={styles.Card}>
+      <Link href={`${path}/${blog._id}`} className={styles.Card}>
         <Image src={blog.image} alt="blog" width={200} height={200} />
         <h2>{blog.title}</h2>
         <p>{blog.createdAt.toLocaleDateString()}</p>
