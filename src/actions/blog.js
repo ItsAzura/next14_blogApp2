@@ -4,6 +4,7 @@ import { connectToDatabase } from '@/database/db';
 import jwt from 'jsonwebtoken';
 import { cookies } from 'next/headers';
 import { writeFile } from 'fs/promises';
+import User from '@/database/models/user';
 
 // Hàm tạo blog mới
 export const createBlog = async (formData) => {
@@ -116,6 +117,43 @@ export const getBlogById = async (id) => {
       return {
         success: true,
         data: blog,
+      };
+    } else {
+      return {
+        success: false,
+        error: 'Blog not found',
+      };
+    }
+  } catch (error) {
+    console.log(error);
+    return {
+      success: false,
+      error: error.message,
+    };
+  }
+};
+
+//Hàm lấy blog theo id của user
+export const getBlogsByUserId = async () => {
+  await connectToDatabase();
+  try {
+    const getCookies = cookies();
+    const Token = getCookies.get('next14_token')?.value || '';
+    if (Token === '') {
+      return {
+        success: false,
+        error: 'User not authenticated',
+      };
+    }
+
+    const decoded = jwt.verify(Token, process.env.JWT_SECRET);
+
+    const blogs = await Blog.find({ authorId: decoded.id });
+
+    if (blogs) {
+      return {
+        success: true,
+        data: blogs,
       };
     } else {
       return {
