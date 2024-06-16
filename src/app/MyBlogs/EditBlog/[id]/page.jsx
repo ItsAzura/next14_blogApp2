@@ -54,11 +54,6 @@ const EditSingleBlog = (props) => {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem('next14_token');
-
-    if (!token) {
-      router.replace('/sign-in');
-    }
     handelBlog();
   }, []);
 
