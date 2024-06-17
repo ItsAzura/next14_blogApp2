@@ -227,3 +227,29 @@ export const updateBlog = async (formData, id) => {
     };
   }
 };
+
+// Hàm xóa blog theo id
+export const deleteBlog = async (id) => {
+  await connectToDatabase();
+
+  try {
+    const deletedBlog = await Blog.findByIdAndDelete({ _id: id });
+    if (deletedBlog) {
+      return {
+        success: true,
+        message: 'Blog deleted successfully',
+      };
+    } else {
+      return {
+        success: false,
+        error: 'Blog not deleted',
+      };
+    }
+  } catch (error) {
+    console.log(error);
+    return {
+      success: false,
+      error: error.message,
+    };
+  }
+};

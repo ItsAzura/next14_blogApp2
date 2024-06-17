@@ -7,8 +7,11 @@ import Loading from '@/components/loading/Loading';
 import Image from 'next/image';
 import { getUserById } from '@/actions/user';
 import Link from 'next/link';
+import { deleteBlog } from '@/actions/blog';
+import { useRouter } from 'next/navigation';
 
 const MyBlogDetails = (props) => {
+  const router = useRouter();
   const { params } = props;
   console.log(params);
 
@@ -28,6 +31,16 @@ const MyBlogDetails = (props) => {
     const res = await getUserById(blog.authorId);
     if (res.success) {
       setUser(res.data);
+    }
+  };
+
+  const handleDelete = async () => {
+    const res = await deleteBlog(blog._id);
+    if (res.success) {
+      alert('Delete success');
+      router.replace('/MyBlogs');
+    } else {
+      alert('Delete failed');
     }
   };
 
@@ -89,7 +102,7 @@ const MyBlogDetails = (props) => {
             </svg>
             Edit
           </Link>
-          <button className={styles.btn}>
+          <button className={styles.btn} onClick={handleDelete}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="1.5rem"
