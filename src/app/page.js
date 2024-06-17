@@ -2,8 +2,6 @@
 import Image from 'next/image';
 import styles from './page.module.css';
 import { AuthUser } from '@/actions/user';
-import { redirect } from 'next/navigation';
-import { signOutUser } from '@/actions/user';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Navbar from '@/components/navbar/NavBar';
@@ -18,28 +16,28 @@ export default function Home() {
   useEffect(() => {
     const token = localStorage.getItem('next14_token');
 
-    if (!token) {
+    if (token === null || !token) {
       router.replace('/sign-in');
     }
 
     const fetchUser = async () => {
-      const fetchedUser = await AuthUser();
-      console.log(fetchedUser);
-      setUser(fetchedUser);
-      setIsLogin(true);
+      try {
+        const fetchedUser = await AuthUser();
+        console.log(fetchedUser);
+        setUser(fetchedUser);
+        setIsLogin(true);
+      } catch (error) {
+        console.error(error);
+        router.replace('/sign-in');
+      }
     };
 
     fetchUser();
   }, []);
 
-  const handleSignOut = async () => {
-    await signOutUser();
-    router.replace('/sign-in');
-  };
-
   return (
     <div>
-      <Navbar user={user} logout={handleSignOut} />
+      <Navbar user={user} />
       <div className={styles.container}>
         <div className={styles.content}>
           <p>Hi, {user?.data?.username}!!!</p>
