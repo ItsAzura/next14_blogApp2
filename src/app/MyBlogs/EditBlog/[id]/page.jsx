@@ -7,6 +7,8 @@ import styles from './EditBlog.module.css';
 import Link from 'next/link';
 import { updateBlog } from '@/actions/blog';
 import { useRouter } from 'next/navigation';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const EditSingleBlog = (props) => {
   const router = useRouter();
@@ -46,10 +48,10 @@ const EditSingleBlog = (props) => {
     const response = await updateBlog(formData, blog._id);
 
     if (response.success) {
-      alert(response.message);
+      toast.success(response.message);
       router.push(`/MyBlogs/${params.id}`);
     } else {
-      alert(response.error);
+      toast.error(response.error);
     }
   };
 
@@ -67,6 +69,7 @@ const EditSingleBlog = (props) => {
 
   return (
     <div className={styles.container}>
+      <ToastContainer />
       <Link href={`/MyBlogs/${params.id}`}>
         <svg
           xmlns="http://www.w3.org/2000/svg"

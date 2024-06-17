@@ -9,6 +9,8 @@ import { getUserById } from '@/actions/user';
 import Link from 'next/link';
 import { deleteBlog } from '@/actions/blog';
 import { useRouter } from 'next/navigation';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const MyBlogDetails = (props) => {
   const router = useRouter();
@@ -38,7 +40,9 @@ const MyBlogDetails = (props) => {
     const res = await deleteBlog(blog._id);
     if (res.success) {
       alert('Delete success');
-      router.replace('/MyBlogs');
+      setTimeout(() => {
+        router.replace('/MyBlogs');
+      }, 3000);
     } else {
       alert('Delete failed');
     }
@@ -59,6 +63,7 @@ const MyBlogDetails = (props) => {
   return (
     <div>
       <div className={styles.container}>
+        <ToastContainer />
         <Link href="/MyBlogs">
           <svg
             xmlns="http://www.w3.org/2000/svg"

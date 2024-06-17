@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { signInUser } from '@/actions/user';
 import { useRouter } from 'next/navigation';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SignInPage = () => {
   const router = useRouter();
@@ -23,10 +25,12 @@ const SignInPage = () => {
     const res = await signInUser(formData);
     console.log(res);
     if (res.success) {
-      alert(res.message);
-      router.push('/');
+      toast.success(res.message);
+      setTimeout(() => {
+        router.push('/');
+      }, 3000);
     } else {
-      alert(res.error);
+      toast.error(res.error);
     }
   };
 
@@ -34,6 +38,7 @@ const SignInPage = () => {
   console.log(formData);
   return (
     <div className={styles.Container}>
+      <ToastContainer />
       <div className={styles.Container_Left}>
         <Image src="/sign-in.png" alt="Sign Up" width={600} height={600} />
       </div>

@@ -6,6 +6,8 @@ import { useState, useEffect } from 'react';
 import { updateUser, getUserById } from '@/actions/user';
 import { useRouter } from 'next/navigation';
 import Loading from '@/components/loading/Loading';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const EditProfile = (props) => {
   const router = useRouter();
@@ -40,12 +42,14 @@ const EditProfile = (props) => {
 
     console.log([...formData]);
 
-    const response = await updateUser(formData, user._id);
-    if (response.success) {
-      alert(response.message);
-      router.push(`/profile`);
+    const res = await updateUser(formData, user._id);
+    if (res.success) {
+      toast.success(res.message);
+      setTimeout(() => {
+        router.push(`/profile`);
+      }, 3000);
     } else {
-      alert(response.error);
+      toast.error(res.error);
     }
   };
 
@@ -73,6 +77,7 @@ const EditProfile = (props) => {
 
   return (
     <div className={styles.container}>
+      <ToastContainer />
       <Link href={`/profile`}>
         <svg
           xmlns="http://www.w3.org/2000/svg"

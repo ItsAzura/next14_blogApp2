@@ -4,6 +4,8 @@ import styles from './AddBlog.module.css';
 import { createBlog } from '@/actions/blog';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddBlog = () => {
   const router = useRouter();
@@ -36,14 +38,16 @@ const AddBlog = () => {
     newFormData.append('image', formData.image);
 
     // Gọi hàm tạo blog mới từ file actions/blog.js
-    const response = await createBlog(newFormData);
+    const res = await createBlog(newFormData);
 
     // Hiển thị thông báo
-    if (response.success) {
-      alert(response.message);
-      router.push('/blogs'); // Chuyển hướng về trang blogs
+    if (res.success) {
+      toast.success(res.message);
+      setTimeout(() => {
+        router.push('/blogs');
+      }, 3000);
     } else {
-      alert(response.error);
+      toast.error(res.error);
     }
   };
 
@@ -51,6 +55,7 @@ const AddBlog = () => {
 
   return (
     <div className={styles.container}>
+      <ToastContainer />
       <Link href="/">
         <svg
           xmlns="http://www.w3.org/2000/svg"
