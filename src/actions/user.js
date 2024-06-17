@@ -4,6 +4,7 @@ import { connectToDatabase } from '@/database/db';
 import bcryptjs from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { cookies } from 'next/headers';
+import { writeFile } from 'fs/promises';
 
 export const signUpUser = async (formData) => {
   await connectToDatabase();
@@ -201,6 +202,75 @@ export const getDetaislUser = async () => {
       return {
         success: true,
         data: JSON.parse(JSON.stringify(user)),
+      };
+    }
+  } catch (error) {
+    console.log(error);
+    return {
+      success: false,
+      error: error.message,
+    };
+  }
+};
+
+export const updateUser = async (formData, id) => {
+  await connectToDatabase();
+  try {
+    const username = formData.get('username');
+    const email = formData.get('email');
+    const avatar = formData.get('avatar');
+    const designation = formData.get('designation');
+    const age = formData.get('age');
+    const location = formData.get('location');
+    const about = formData.get('about');
+
+    if (!username || !email || !designation || !age || !location || !about) {
+      return {
+        success: false,
+        error: 'Please enter all fields',
+      };
+    }
+
+    if (!avatar || !(avatar instanceof File)) {
+      return {
+        success: false,
+        error: 'Please upload your Avatar',
+      };
+    }
+
+    const bytes = await avatar.arrayBuffer();
+    const buffer = Buffer.from(bytes);
+    const profileImagePath = `D:/Nextjs/next14_blogapp/public/upload/${avatar.name}`;
+    await writeFile(profileImagePath, buffer);
+    console.log(`open ${profileImagePath} to see the uploaded files`);
+
+    const updateBlog = await User.findByIdAndUpdate(
+      {
+        _id: id,
+      },
+      {
+        username,
+        email,
+        avatar: `/upload/${avatar.name}`,
+        designation,
+        age,
+        location,
+        about,
+      },
+      {
+        new: true,
+      }
+    );
+
+    if (updateBlog) {
+      return {
+        success: true,
+        message: 'Blog updated successfully',
+      };
+    } else {
+      return {
+        success: false,
+        error: 'Blog not updated',
       };
     }
   } catch (error) {

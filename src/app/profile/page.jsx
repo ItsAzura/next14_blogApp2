@@ -64,7 +64,7 @@ const Profile = () => {
           <p>{user.about}</p>
         </div>
         <div className={styles.btn}>
-          <Link href={`/edit-profile/${user._id}`}>
+          <Link href={`/profile/edit-profile/${user._id}`}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="2rem"
