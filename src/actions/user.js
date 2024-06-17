@@ -176,3 +176,38 @@ export const getUserById = async (id) => {
     };
   }
 };
+
+export const getDetaislUser = async () => {
+  await connectToDatabase();
+  try {
+    const getCookies = cookies();
+    const Token = getCookies.get('next14_token')?.value || '';
+    if (Token === '') {
+      return {
+        success: false,
+        error: 'User not authenticated',
+      };
+    }
+
+    const decoded = jwt.verify(Token, process.env.JWT_SECRET);
+
+    const user = await User.findById({ _id: decoded.id });
+    if (!user) {
+      return {
+        success: false,
+        error: 'User not found',
+      };
+    } else {
+      return {
+        success: true,
+        data: JSON.parse(JSON.stringify(user)),
+      };
+    }
+  } catch (error) {
+    console.log(error);
+    return {
+      success: false,
+      error: error.message,
+    };
+  }
+};

@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-
 const userSchema = new mongoose.Schema(
   {
     username: {
@@ -15,13 +14,13 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    designation: {
+    avatar: {
       type: String,
       default: '',
     },
-    avatar: {
-      type: Object,
-      default: {},
+    designation: {
+      type: String,
+      default: '',
     },
     age: {
       type: String,
