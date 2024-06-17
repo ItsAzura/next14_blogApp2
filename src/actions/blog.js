@@ -4,7 +4,6 @@ import { connectToDatabase } from '@/database/db';
 import jwt from 'jsonwebtoken';
 import { cookies } from 'next/headers';
 import { writeFile } from 'fs/promises';
-import User from '@/database/models/user';
 
 // Hàm tạo blog mới
 export const createBlog = async (formData) => {

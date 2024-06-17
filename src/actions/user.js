@@ -231,7 +231,7 @@ export const updateUser = async (formData, id) => {
       };
     }
 
-    if (!avatar || !(avatar instanceof File)) {
+    if (!avatar || !(avatar instanceof File || typeof avatar === 'string')) {
       return {
         success: false,
         error: 'Please upload your Avatar',
