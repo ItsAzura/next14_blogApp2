@@ -57,3 +57,73 @@
   -moz-box-shadow: 0 0 8px 1px #ffffff;
   box-shadow: 0 0 8px 1px #ffffff;
 }
+
+.sideBarIcon {
+  display: none;
+}
+
+@media screen and (max-width: 950px) {
+  .logo p {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .navbarItems {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    top: 14%;
+    right: 4%;
+    z-index: 1;
+    background-color: #000;
+    padding: 0.75rem;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+  }
+
+  .navbarItems.show {
+    display: flex;
+  }
+
+  .navbarItems a {
+    background-color: #000;
+  }
+
+  .navbarItems a:hover {
+    background-color: #fff;
+    color: #000;
+  }
+
+  .navbarItems button {
+    background-color: #000;
+  }
+
+  .sideBarIcon {
+    display: block;
+    font-size: 2rem;
+    cursor: pointer;
+  }
+
+  .sideBarIcon:hover {
+    transform: scale(1.1);
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .navbar {
+    padding: 0.5rem;
+  }
+  .navbar img {
+    width: 50%;
+    height: 50%;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .navbarItems {
+    top: 8%;
+    right: 2%;
+  }
+}

@@ -182,3 +182,16 @@
     opacity: 1;
   }
 }
+
+@media screen and (max-width: 360px) {
+  .container a {
+    display: none;
+  }
+  .form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    margin-left: 20%;
+  }
+}
