@@ -13,14 +13,17 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const MyBlogDetails = (props) => {
+  //Lấy params từ props
   const router = useRouter();
   const { params } = props;
   console.log(params);
 
+  //Tạo state
   const [blog, setBlog] = useState(null);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  //Hàm lấy blog theo id
   const fetchBlogDetails = async () => {
     const res = await getBlogById(params.id);
     if (res.success) {
@@ -29,6 +32,7 @@ const MyBlogDetails = (props) => {
     }
   };
 
+  //Hàm lấy thông tin user theo id
   const fetchUserDetails = async () => {
     const res = await getUserById(blog.authorId);
     if (res.success) {
@@ -36,6 +40,7 @@ const MyBlogDetails = (props) => {
     }
   };
 
+  //Hàm xử lý xóa blog
   const handleDelete = async () => {
     const res = await deleteBlog(blog._id);
     if (res.success) {
@@ -48,10 +53,12 @@ const MyBlogDetails = (props) => {
     }
   };
 
+  //Gọi hàm fetchBlogDetails khi component được render
   useEffect(() => {
     fetchBlogDetails();
   }, []);
 
+  //Gọi hàm fetchUserDetails khi blog thay đổi
   useEffect(() => {
     if (blog) {
       fetchUserDetails(blog.authorId);

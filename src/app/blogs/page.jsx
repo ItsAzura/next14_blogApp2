@@ -8,10 +8,12 @@ import styles from './Blog.module.css';
 import Link from 'next/link';
 
 const Blogs = () => {
+  //Tạo state
   const [path, setPath] = useState('');
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  //Hàm lấy tất cả blog
   const fetchBlogList = async () => {
     const res = await getAllBlogs();
     if (res.success) {
@@ -20,6 +22,7 @@ const Blogs = () => {
     }
   };
 
+  //Gọi hàm fetchBlogList khi component được render
   useEffect(() => {
     fetchBlogList();
     if (typeof window !== 'undefined') {

@@ -8,9 +8,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const Profile = () => {
+  //Tạo state
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  //Hàm lấy thông tin user
   const fetchUserDetails = async () => {
     const res = await getDetaislUser();
     if (res.success) {
@@ -19,6 +21,7 @@ const Profile = () => {
     }
   };
 
+  //Gọi hàm fetchUserDetails khi component được render
   useEffect(() => {
     fetchUserDetails();
   }, []);

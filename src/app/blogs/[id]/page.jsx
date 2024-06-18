@@ -9,14 +9,18 @@ import { getUserById } from '@/actions/user';
 import Link from 'next/link';
 
 const BlogDetails = (props) => {
+  //Lấy params từ props
   const { params } = props;
   console.log(params);
 
+  //Tạo state
   const [blog, setBlog] = useState(null);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  //Hàm lấy blog theo id
   const fetchBlogDetails = async () => {
+    //Gọi hàm getBlogById và truyền id vào
     const res = await getBlogById(params.id);
     if (res.success) {
       setBlog(res.data);
@@ -24,6 +28,7 @@ const BlogDetails = (props) => {
     }
   };
 
+  //Hàm lấy thông tin user theo id
   const fetchUserDetails = async () => {
     const res = await getUserById(blog.authorId);
     if (res.success) {
@@ -31,10 +36,12 @@ const BlogDetails = (props) => {
     }
   };
 
+  //Gọi hàm fetchBlogDetails khi component được render
   useEffect(() => {
     fetchBlogDetails();
   }, []);
 
+  //Gọi hàm fetchUserDetails khi blog thay đổi
   useEffect(() => {
     if (blog) {
       fetchUserDetails(blog.authorId);

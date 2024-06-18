@@ -10,13 +10,16 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const EditProfile = (props) => {
+  //Lấy params từ props
   const router = useRouter();
   const { params } = props;
   console.log(params);
 
+  //Tạo state
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  //Hàm xử lý thay đổi giá trị của input
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     setUser({
@@ -26,10 +29,13 @@ const EditProfile = (props) => {
     });
   };
 
+  //Hàm xử lý submit form
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    //Tạo formData
     const formData = new FormData();
+    //Thêm các trường vào formData
     formData.append('username', user.username);
     formData.append('email', user.email);
     if (user.avatar instanceof File) {
@@ -39,9 +45,9 @@ const EditProfile = (props) => {
     formData.append('age', user.age);
     formData.append('location', user.location);
     formData.append('about', user.about);
-
     console.log([...formData]);
 
+    //Gọi hàm updateUser và truyền formData và id vào
     const res = await updateUser(formData, user._id);
     if (res.success) {
       toast.success(res.message);
@@ -53,6 +59,7 @@ const EditProfile = (props) => {
     }
   };
 
+  //Hàm lấy thông tin user theo id
   const handelUser = async () => {
     const res = await getUserById(params.id);
     if (res.success) {
@@ -61,15 +68,16 @@ const EditProfile = (props) => {
     }
   };
 
+  //Gọi hàm handelUser khi component được render
   useEffect(() => {
     handelUser();
   }, []);
 
-  useEffect(() => {
-    if (user) {
-      handleSubmit();
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user) {
+  //     handleSubmit();
+  //   }
+  // }, [user]);
 
   console.log(user);
 
