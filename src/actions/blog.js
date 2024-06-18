@@ -91,8 +91,10 @@ export const createBlog = async (formData) => {
 
 // Hàm lấy tất cả blog
 export const getAllBlogs = async () => {
+  // Kết nối tới database
   await connectToDatabase();
   try {
+    // Lấy tất cả blog
     const blogs = await Blog.find();
     return {
       success: true,
@@ -109,8 +111,10 @@ export const getAllBlogs = async () => {
 
 // Hàm lấy blog theo id
 export const getBlogById = async (id) => {
+  // Kết nối tới database
   await connectToDatabase();
   try {
+    // Lấy blog theo id
     const blog = await Blog.findById(id);
     if (blog) {
       return {
@@ -134,8 +138,10 @@ export const getBlogById = async (id) => {
 
 //Hàm lấy blog theo id của user
 export const getBlogsByUserId = async () => {
+  // Kết nối tới database
   await connectToDatabase();
   try {
+    // Lấy token từ cookie
     const getCookies = cookies();
     const Token = getCookies.get('next14_token')?.value || '';
     if (Token === '') {
@@ -145,10 +151,13 @@ export const getBlogsByUserId = async () => {
       };
     }
 
+    // Giải mã token để lấy ra id của người dùng
     const decoded = jwt.verify(Token, process.env.JWT_SECRET);
 
+    // Lấy blog theo id của người dùng
     const blogs = await Blog.find({ authorId: decoded.id });
 
+    // Trả về thông tin blog
     if (blogs) {
       return {
         success: true,
@@ -171,12 +180,15 @@ export const getBlogsByUserId = async () => {
 
 // Hàm cập nhật blog theo id
 export const updateBlog = async (formData, id) => {
+  // Kết nối tới database
   await connectToDatabase();
   try {
+    // Lấy dữ liệu từ form
     const title = formData.get('title');
     const content = formData.get('content');
     const image = formData.get('image');
 
+    // Kiểm tra xem các trường có được nhập đầy đủ không
     if (!title || !content) {
       return {
         success: false,
@@ -184,6 +196,7 @@ export const updateBlog = async (formData, id) => {
       };
     }
 
+    // Kiểm tra xem người dùng đã upload ảnh chưa
     if (!image || !(image instanceof File)) {
       return {
         success: false,
@@ -191,12 +204,14 @@ export const updateBlog = async (formData, id) => {
       };
     }
 
+    // Chuyển ảnh từ dạng File sang dạng Buffer
     const bytes = await image.arrayBuffer();
     const buffer = Buffer.from(bytes);
     const profileImagePath = `D:/Nextjs/next14_blogapp/public/upload/${image.name}`;
     await writeFile(profileImagePath, buffer);
     console.log(`open ${profileImagePath} to see the uploaded files`);
 
+    // Cập nhật blog theo id
     const updateBlog = await Blog.findByIdAndUpdate(
       id,
       {
@@ -207,6 +222,7 @@ export const updateBlog = async (formData, id) => {
       { new: true }
     );
 
+    // Trả về thông báo tùy thuộc vào việc blog đã được cập nhật hay chưa
     if (updateBlog) {
       return {
         success: true,
@@ -229,10 +245,13 @@ export const updateBlog = async (formData, id) => {
 
 // Hàm xóa blog theo id
 export const deleteBlog = async (id) => {
+  // Kết nối tới database
   await connectToDatabase();
 
   try {
+    // Xóa blog theo id
     const deletedBlog = await Blog.findByIdAndDelete({ _id: id });
+    // Trả về thông báo tùy thuộc vào việc blog đã được xóa hay chưa
     if (deletedBlog) {
       return {
         success: true,
