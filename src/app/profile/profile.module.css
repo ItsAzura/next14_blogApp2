@@ -125,7 +125,7 @@
 }
 
 .btn a {
-  width: 14%;
+  width: 45%;
   position: static;
   padding: 1rem 2rem;
   border: none;
@@ -207,7 +207,6 @@
 
   .btn a {
     position: static;
-    width: 30%;
     padding: 0.5rem 1rem;
     font-size: 0.8rem;
     color: #fff;
