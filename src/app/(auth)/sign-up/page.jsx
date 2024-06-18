@@ -10,20 +10,25 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const SignUpPage = () => {
   const router = useRouter();
+  //Tạo state formData
   const [formData, setFormData] = useState({
     username: '',
     email: '',
     password: '',
   });
 
+  //Hàm xử lý thay đổi giá trị của input
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  //Hàm xử lý submit form
   const handleSubmit = async (e) => {
     e.preventDefault();
+    //Gọi hàm signUpUser và truyền formData vào
     const res = await signUpUser(formData);
     console.log(res);
+    //Kiểm tra kết quả trả về
     if (res.success) {
       toast.success(res.message);
       setTimeout(() => {
@@ -34,6 +39,7 @@ const SignUpPage = () => {
     }
   };
 
+  //Kiểm tra xem form có hợp lệ không
   const isFormValid = formData.username && formData.email && formData.password;
   console.log(formData);
   return (
@@ -44,15 +50,17 @@ const SignUpPage = () => {
       </div>
       <div className={styles.Container_Right}>
         <h1>Sign Up</h1>
-        <form onSubmit={handleSubmit}>
+        <form
+          onSubmit={handleSubmit} //Gọi hàm handleSubmit khi submit form
+        >
           <div className={styles.input}>
             <p>User Name</p>
             <input
               type="text"
               name="username"
               id="username"
-              value={formData.username}
-              onChange={handleChange}
+              value={formData.username} //Gán giá trị của input vào state formData
+              onChange={handleChange} //Gọi hàm handleChange khi thay đổi giá trị của input
             />
           </div>
           <div className={styles.input}>
@@ -61,8 +69,8 @@ const SignUpPage = () => {
               type="email"
               name="email"
               id="email"
-              value={formData.email}
-              onChange={handleChange}
+              value={formData.email} //Gán giá trị của input vào state formData
+              onChange={handleChange} //Gọi hàm handleChange khi thay đổi giá trị của input
             />
           </div>
           <div className={styles.input}>
@@ -71,12 +79,15 @@ const SignUpPage = () => {
               type="password"
               name="password"
               id="password"
-              value={formData.password}
-              onChange={handleChange}
+              value={formData.password} //Gán giá trị của input vào state formData
+              onChange={handleChange} //Gọi hàm handleChange khi thay đổi giá trị của input
             />
           </div>
           <div className={styles.btn}>
-            <button type="submit" disabled={!isFormValid}>
+            <button
+              type="submit"
+              disabled={!isFormValid} //Disable button nếu form không hợp lệ
+            >
               Sign Up
             </button>
           </div>
